@@ -9,11 +9,25 @@ const schema = defineSchema({
       format: "mdx",
       fields: [
         {
-          name: "body",
-          label: "Main Content",
-          type: "rich-text",
-          isBody: true,
-        },
+          name: "level1",
+          label: "Level 1",
+          type: "object",
+          fields: [
+            {
+              name: "level1_1",
+              label: "Level 1.1",
+              type: "object",
+              // list: true,
+              fields: [
+                {
+                  name: "level1_1_1",
+                  label: "Level 1.1.1",
+                  type: "string"
+                }
+              ]
+            }
+          ]
+        }
       ],
       ui: {
         router: ({ document }) => {
@@ -23,33 +37,7 @@ const schema = defineSchema({
           return undefined;
         },
       },
-    },
-    {
-      label: "Blog Posts",
-      name: "post",
-      path: "content/post",
-      fields: [
-        {
-          type: "string",
-          label: "Title",
-          name: "title",
-        },
-        {
-          type: "string",
-          label: "Blog Post Body",
-          name: "body",
-          isBody: true,
-          ui: {
-            component: "textarea",
-          },
-        },
-      ],
-      ui: {
-        router: ({ document }) => {
-          return `/posts/${document._sys.filename}`;
-        },
-      },
-    },
+    }
   ],
 });
 
